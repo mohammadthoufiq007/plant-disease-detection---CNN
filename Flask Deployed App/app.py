@@ -8,11 +8,17 @@ import torch
 import pandas as pd
 
 
-disease_info = pd.read_csv('disease_info.csv' , encoding='cp1252')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-model = CNN.CNN(39)    
-model.load_state_dict(torch.load("plant_disease_model_1_latest.pt", map_location=torch.device('cpu')))
-model.eval()
+disease_info = pd.read_csv(os.path.join(BASE_DIR, 'disease_info.csv'), encoding='cp1252')
+
+model = CNN.CNN(39)
+model_path = os.path.join(BASE_DIR, "plant_disease_model_1_latest.pt")
+if os.path.exists(model_path):
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+    model.eval()
+else:
+    print(f"Warning: Model file not found at {model_path}")
 
 def prediction(image_path):
     image = Image.open(image_path).convert('RGB')
@@ -25,7 +31,9 @@ def prediction(image_path):
     return index
 
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            template_folder=os.path.join(BASE_DIR, 'templates'), 
+            static_folder=os.path.join(BASE_DIR, 'static'))
 
 @app.route('/')
 @app.route('/index')
@@ -39,8 +47,9 @@ def submit():
             return redirect('/')
         image = request.files['image']
         filename = image.filename
-        os.makedirs('static/uploads', exist_ok=True)
-        file_path = os.path.join('static/uploads', filename)
+        upload_dir = os.path.join(BASE_DIR, 'static', 'uploads')
+        os.makedirs(upload_dir, exist_ok=True)
+        file_path = os.path.join(upload_dir, filename)
         image.save(file_path)
         print(file_path)
         pred = prediction(file_path)
@@ -48,7 +57,7 @@ def submit():
         description = disease_info['description'][pred]
         prevent = disease_info['Possible Steps'][pred]
         image_url = disease_info['image_url'][pred]
-        uploaded_image_url = '/' + file_path.replace('\\', '/')
+        uploaded_image_url = f'/static/uploads/{filename}'
         return render_template('submit.html', title=title, desc=description, prevent=prevent, 
                                image_url=image_url, uploaded_image=uploaded_image_url, pred=pred)
     return redirect('/')
