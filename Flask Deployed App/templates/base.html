@@ -130,48 +130,21 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#05380b;">
-        <!-- <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="navbar-brand active">
-                    <a class="nav-link" href="/" style="color: white;">Home</a>
-                </li>
-                <li class="navbar-brand active">
-                    <a class="nav-link" href="/index" style="color: white;">AI Engine</a>
-                </li>
-                <li class="navbar-brand">
-                    <a class="nav-link" href="/market" style="color: white;">Supplements</a>
-                </li>
-                <li class="navbar-brand">
-                    <a class="nav-link" href="/contact" style="color: white;">Contact-Us</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color:#05380b; padding: 12px 24px;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center text-white" href="/" style="font-weight: 700; font-size: 1.3rem; letter-spacing: 0.5px;">
+                🍀 Plant Disease Detection CNN
+            </a>
+            <span class="badge bg-success" style="font-size: 0.85rem; padding: 6px 12px; border-radius: 20px;">CNN Ready</span>
         </div>
     </nav>
     {% block body %}
 
     {% endblock body %}
-    <div class="footer-basic">
+    <div class="footer-basic" style="padding: 25px 0; background-color: #042908; color: #f1f3f5; margin-top: 40px;">
         <footer>
-            <center>
-            <div style="padding: 5;">
-                <a target="_blank" href='mailto:krsikx@gmail.com'><img src="https://image.flaticon.com/icons/png/512/281/281769.png" height="40" width="40"></a>&nbsp
-                <a target="_blank" href="https://www.instagram.com/krsikx_india/"><img src="https://image.flaticon.com/icons/png/512/174/174855.png" height="40" width="40"></a>&nbsp
-                <a target="_blank"href="https://www.linkedin.com/company/krsikx-india-llp/"><img src="https://image.flaticon.com/icons/png/512/174/174857.png" height="40" width="40"></a>&nbsp
-            </div>
-            </center>
-            <br>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="/">Home</a></li>
-                <li class="list-inline-item"><a target="_blank" href="https://www.krsikx.com/">Services</a></li>
-                <li class="list-inline-item"><a target="_blank" href="https://www.krsikx.com/copy-of-solutions">About</a></li>
-                <li class="list-inline-item laptop"><a href="/index">AI Engine</a></li>
-            </ul>
-            <p class="copyright">Created by Manthan Bhikadiya & Krishna Baldaniya</p>
+            <p class="text-center mb-1" style="font-size: 0.95rem; opacity: 0.9;">🌿 Plant Disease Detection CNN powered by PyTorch</p>
+            <p class="copyright text-center" style="font-size: 0.8rem; color: #88a88c; margin: 0;">Convolutional Neural Network for leaf diagnosis</p>
         </footer>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

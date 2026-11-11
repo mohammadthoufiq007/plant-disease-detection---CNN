@@ -1,85 +1,98 @@
 {% extends 'base.html' %}
 {% block pagetitle %}
-{{title}}
+Result — {{title}}
 {% endblock pagetitle %}
-{% block body %}
 
-<div>
+{% block body %}
+<div class="py-4">
   <div class="container">
-    <!-- For demo purpose -->
-    <div class="row mb-5 text-center text-white">
+    
+    <!-- Header Title -->
+    <div class="row mb-4 text-center text-white">
       <div class="col-lg-10 mx-auto">
-        <h1 class="display-4" style="padding-top: 2%;font-weight: 400;color: rgb(4, 54, 4);""><b>{{title}}🍂</b></h1>
+        <h1 class="display-5" style="font-weight: 700; color: #04360e;"><b>🍀 Plant Disease Detection CNN 🍀</b></h1>
+        <p class="lead" style="font-weight: 500; color: #153e1a;">Detailed CNN analysis and disease management guide</p>
       </div>
     </div>
-    <center>
-    <div class=" col">
-          <div class="p-3 bg-white shadow rounded-lg" style="width: 30%;">
 
-            <img src={{image_url}} width="350" height="350">
-
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Uploaded Leaf Card -->
+      <div class="col-lg-5 col-md-6">
+        <div class="p-4 bg-white shadow rounded-lg h-100 text-center d-flex flex-column justify-content-between">
+          <div>
+            <h5 style="color: #05380b; font-weight: 700;" class="mb-3">📷 Your Uploaded Leaf</h5>
+            <div class="p-2 border rounded bg-light mb-3 d-inline-block" style="max-width: 100%;">
+              <img src="{{ uploaded_image }}" alt="Uploaded Leaf" class="img-fluid rounded" 
+                   style="max-height: 320px; object-fit: contain; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" 
+                   onerror="this.src='{{ image_url }}';" />
+            </div>
+            
+            {% if pred in [3, 5, 7, 11, 15, 18, 20, 23, 24, 25, 28, 38] %}
+            <div class="alert alert-success d-inline-block px-3 py-2 mt-2" style="font-size: 1rem; font-weight: 600;">
+              ✅ Status: Healthy Leaf
+            </div>
+            {% else %}
+            <div class="alert alert-warning d-inline-block px-3 py-2 mt-2" style="font-size: 1rem; font-weight: 600;">
+              ⚠️ Status: Disease Detected
+            </div>
+            {% endif %}
           </div>
-      </div>
-      </center>
-      <br>
-      <div class=" row ">
-        <div class="col mx-auto">
-          <div class="p-5 bg-white shadow rounded-lg" style="height: 95%;">
 
-            <h5><b>
-                {% if pred==3 or pred==5 or pred==7 or pred==11 or pred==15 or pred==18 or pred==20 or pred==23 or
-                pred==24 or pred==25 or pred==28 or pred==38 %}
-                Tips to Grow Healthy Plants :
+          <div class="mt-3">
+            <a href="/" class="btn btn-outline-success w-100" style="font-weight: 600;">
+              🔄 Analyze Another Image
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disease Information & Prevention Steps -->
+      <div class="col-lg-7 col-md-6">
+        <div class="p-4 bg-white shadow rounded-lg h-100 d-flex flex-column justify-content-between">
+          <div>
+            <!-- Condition Title -->
+            <div class="border-bottom pb-3 mb-3">
+              <span class="text-muted small">IDENTIFIED CONDITION</span>
+              <h2 style="color: #05380b; font-weight: 700; margin-top: 4px;">{{ title }}</h2>
+            </div>
+
+            <!-- Description / Tips -->
+            <div class="mb-4">
+              <h5 style="color: #05380b; font-weight: 600;">
+                {% if pred in [3, 5, 7, 11, 15, 18, 20, 23, 24, 25, 28, 38] %}
+                🌱 About Healthy Plant Maintenance:
                 {% else %}
-                Brief Descritpion :
+                🔬 Description of Condition:
                 {% endif %}
-              </b></h5>
-            <p>{{desc}}
-            </p>
+              </h5>
+              <p class="text-secondary" style="font-size: 0.95rem; line-height: 1.7;">
+                {{ desc }}
+              </p>
+            </div>
+
+            <!-- Prevention / Steps -->
+            <div class="mb-3">
+              <h5 style="color: #05380b; font-weight: 600;">
+                {% if pred in [3, 5, 7, 11, 15, 18, 20, 23, 24, 25, 28, 38] %}
+                🌟 Best Practices for Continuous Health:
+                {% else %}
+                🛡️ Recommended Prevention & Action Steps:
+                {% endif %}
+              </h5>
+              <p class="text-secondary" style="font-size: 0.95rem; line-height: 1.7; white-space: pre-line;">
+                {{ prevent }}
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-3 border-top d-flex justify-content-end">
+            <a href="/" class="btn btn-success px-4" style="background-color: #05380b; border: none; font-weight: 600;">
+              Back to CNN Detector
+            </a>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col mx-auto">
-          <div class="p-5 bg-white shadow rounded-lg" style="height:95%">
-            <h5><b>
-                {% if pred==3 or pred==5 or pred==7 or pred==11 or pred==15 or pred==18 or pred==20 or pred==23 or
-                pred==24 or pred==25 or pred==28 or pred==38 %}
-                Benefits :
-                {% else %}
-                Prevent This Plant Disease By follow below steps :
-                {% endif %}
-              </b></h5>
-            <p>
-              {{prevent}}
-            </p>
-          </div>
-        </div>
-
-        {% if pred!=4 %}
-        <div class="col mx-auto"">
-        <div class=" p-5 bg-white shadow rounded-lg" style="height: 95%;">
-          <center>
-            <h5><b>
-                {% if pred==3 or pred==5 or pred==7 or pred==11 or pred==15 or pred==18 or pred==20 or pred==23 or
-                pred==24 or pred==25 or pred==28 or pred==38 %}
-                Fertilizer :
-                {% else %}
-                Supplements :
-                {% endif %}
-              </b></h5>
-            <br>
-            <img src={{simage}} width="300" height="350">
-            <br>
-            <br>
-            <h6>{{sname}}</h6>
-
-            <a target="_blank" href={{buy_link}}><button type="button" class="btn btn-success"
-                style="background-color: #05380b;">Buy Product</button></a>
-          </center>
-        </div>
-      </div>
-      {% endif %}
 
     </div>
   </div>

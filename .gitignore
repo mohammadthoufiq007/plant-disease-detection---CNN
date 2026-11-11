@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Large Model weights (download via Google Drive link in README.md)
+*.pt
+*.pth
+*.onnx
+*.bin
+*.h5
+
+# Flask uploads (keep directory with Readme.md)
+Flask Deployed App/static/uploads/*
+!Flask Deployed App/static/uploads/Readme.md
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
