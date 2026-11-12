@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 interface SampleLeavesProps {
   onSelectSample: (imageSrc: string, filename: string) => void;
@@ -50,45 +50,56 @@ const SAMPLES = [
 
 export default function SampleLeaves({ onSelectSample, disabled }: SampleLeavesProps) {
   return (
-    <div className="mt-8 pt-6 border-t border-emerald-500/15">
-      <div className="flex items-center gap-2 mb-3">
-        <Sparkles className="w-4 h-4 text-emerald-400" />
-        <h4 className="text-sm font-semibold text-slate-200">
-          Try a Sample Test Leaf (1-Click Test)
-        </h4>
+    <div className="mt-8 pt-6 border-t border-[#1a3821]">
+      <div className="flex items-center justify-between mb-3.5">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-emerald-400" />
+          <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-emerald-400">
+            Quick-Test Library (1-Click Sample Leaves)
+          </h4>
+        </div>
+        <span className="text-xs text-slate-400 hidden sm:inline">
+          Click any leaf to test diagnosis instantly
+        </span>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-        {SAMPLES.map((sample, index) => (
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3">
+        {SAMPLES.map((sample) => (
           <motion.button
             key={sample.name}
             type="button"
             disabled={disabled}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => onSelectSample(sample.src, sample.name.toLowerCase().replace(/\s+/g, "_") + ".jpg")}
-            className="group relative flex flex-col items-center p-2 rounded-xl glass-card transition-all text-left overflow-hidden disabled:opacity-50"
+            className="group surface-card rounded-xl p-2 text-left disabled:opacity-50 relative flex flex-col justify-between"
           >
-            <div className="w-full h-20 rounded-lg overflow-hidden bg-slate-900/60 mb-2 relative">
-              <img
-                src={sample.src}
-                alt={sample.name}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <span
-                className={`absolute top-1 right-1 px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                  sample.status === "Healthy"
-                    ? "bg-emerald-500/80 text-white"
-                    : "bg-amber-500/80 text-black"
-                }`}
-              >
-                {sample.status}
-              </span>
+            <div>
+              <div className="w-full aspect-square rounded-lg overflow-hidden bg-black/50 mb-2 relative border border-[#1a3821]">
+                <img
+                  src={sample.src}
+                  alt={sample.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                />
+                <span
+                  className={`absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                    sample.status === "Healthy"
+                      ? "bg-emerald-950/90 text-emerald-300 border border-emerald-500/40"
+                      : "bg-amber-950/90 text-amber-300 border border-amber-500/40"
+                  }`}
+                >
+                  {sample.status}
+                </span>
+              </div>
+              <p className="text-xs font-semibold text-slate-100 truncate leading-tight">
+                {sample.name}
+              </p>
             </div>
-            <span className="text-xs font-medium text-slate-200 truncate w-full text-center">
-              {sample.name}
-            </span>
-            <span className="text-[10px] text-emerald-400/80">{sample.crop}</span>
+            
+            <div className="mt-1 flex items-center justify-between text-[11px] text-emerald-400 font-medium">
+              <span>{sample.crop}</span>
+              <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
           </motion.button>
         ))}
       </div>

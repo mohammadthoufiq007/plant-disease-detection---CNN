@@ -75,20 +75,21 @@ export default function CameraCapture({ onCapture, onClose }: CameraCaptureProps
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      className="relative rounded-2xl overflow-hidden glass-panel border border-emerald-500/40 p-4 max-w-lg mx-auto"
+      exit={{ opacity: 0, scale: 0.96 }}
+      className="surface-panel rounded-2xl p-5 max-w-lg w-full mx-auto border border-emerald-500/30 shadow-2xl relative"
     >
-      <div className="flex items-center justify-between mb-3 text-slate-200">
+      <div className="flex items-center justify-between mb-3 text-slate-100">
         <div className="flex items-center gap-2">
           <Camera className="w-5 h-5 text-emerald-400" />
-          <span className="font-semibold text-sm">Align Leaf in Frame</span>
+          <span className="font-semibold text-sm">Position Leaf in Viewfinder</span>
         </div>
         <button
           onClick={onClose}
           type="button"
-          className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+          className="p-1.5 rounded-lg btn-secondary text-slate-300"
+          aria-label="Close Camera"
         >
           <X className="w-4 h-4" />
         </button>
@@ -99,38 +100,36 @@ export default function CameraCapture({ onCapture, onClose }: CameraCaptureProps
           {error}
         </div>
       ) : (
-        <div className="relative rounded-xl overflow-hidden bg-black aspect-video flex items-center justify-center">
+        <div className="relative rounded-xl overflow-hidden bg-black aspect-video flex items-center justify-center border border-[#1a3821]">
           <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
 
           {/* Framing Target Box */}
-          <div className="absolute inset-8 border-2 border-emerald-400/60 rounded-xl pointer-events-none flex items-center justify-center">
-            <span className="text-xs text-emerald-300/80 bg-black/50 px-2 py-0.5 rounded backdrop-blur">
-              Place single leaf here
+          <div className="absolute inset-6 border-2 border-dashed border-emerald-400/70 rounded-xl pointer-events-none flex items-center justify-center bg-emerald-500/5">
+            <span className="text-xs font-semibold text-emerald-300 bg-black/70 px-2.5 py-1 rounded-md border border-emerald-500/30">
+              Center leaf surface here
             </span>
           </div>
         </div>
       )}
 
-      <div className="flex items-center justify-center gap-4 mt-4">
+      <div className="flex items-center justify-center gap-3 mt-4">
         <button
           type="button"
           onClick={toggleFacing}
-          className="p-3 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700"
-          title="Switch Camera"
+          className="p-2.5 rounded-lg btn-secondary"
+          title="Switch Camera Direction"
         >
-          <RefreshCw className="w-5 h-5" />
+          <RefreshCw className="w-4 h-4" />
         </button>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.9 }}
+        <button
           type="button"
           onClick={handleSnap}
-          className="px-6 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-green-400 text-slate-950 font-bold flex items-center gap-2 shadow-lg shadow-emerald-500/30"
+          className="px-6 py-2.5 rounded-lg btn-primary flex items-center gap-2 text-sm"
         >
-          <Camera className="w-5 h-5" />
-          <span>Capture Photo</span>
-        </motion.button>
+          <Camera className="w-4 h-4" />
+          <span>Snap Photo</span>
+        </button>
       </div>
     </motion.div>
   );

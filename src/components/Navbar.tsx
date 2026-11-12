@@ -20,57 +20,52 @@ export default function Navbar({ apiKey, setApiKey }: NavbarProps) {
 
   return (
     <>
-      <header className="sticky top-0 z-50 glass-panel border-b border-emerald-500/20 backdrop-blur-md">
+      <header className="sticky top-0 z-40 bg-[#060d08]/90 border-b border-[#16311d] backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           
           {/* Logo & Brand */}
           <div className="flex items-center gap-3">
-            <motion.div
-              whileHover={{ rotate: 15, scale: 1.08 }}
-              className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-green-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white"
-            >
-              <Leaf className="w-5 h-5 fill-current" />
-            </motion.div>
+            <div className="w-9 h-9 rounded-lg bg-emerald-600/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+              <Leaf className="w-5 h-5 fill-emerald-400/20 text-emerald-400" />
+            </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-lg tracking-tight bg-gradient-to-r from-emerald-300 via-green-200 to-white bg-clip-text text-transparent">
+                <span className="font-bold text-base sm:text-lg tracking-tight text-white">
                   Plant Disease Detection CNN
                 </span>
-                <span className="hidden sm:inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                  AI v2.0
+                <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  PyTorch CNN
                 </span>
               </div>
-              <p className="text-xs text-emerald-400/70 hidden sm:block">
-                Deep Learning Diagnostics • 39 Plant Categories
+              <p className="text-[11px] text-emerald-400/80 hidden sm:block">
+                Convolutional Neural Network • 39 Plant Disease Categories
               </p>
             </div>
           </div>
 
-          {/* Right Action buttons */}
-          <div className="flex items-center gap-3">
+          {/* Right Actions */}
+          <div className="flex items-center gap-2.5">
             {/* Optional API Key Button */}
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+            <button
               onClick={() => setShowKeyModal(true)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                 apiKey
-                  ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
-                  : "bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-emerald-500/30"
+                  ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/25"
+                  : "btn-secondary text-slate-300"
               }`}
             >
-              <Key className="w-3.5 h-3.5" />
-              <span>{apiKey ? "Gemini Key Configured" : "Add Gemini Key (Optional)"}</span>
+              <Key className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{apiKey ? "Gemini Key Active" : "Gemini API (Optional)"}</span>
               {apiKey && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
-            </motion.button>
+            </button>
 
             {/* GitHub Link */}
             <a
               href="https://github.com/mohammadthoufiq007/plant-disease-detection---CNN"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 hover:border-emerald-500/30 text-slate-300 hover:text-white transition-colors"
-              title="View on GitHub"
+              className="p-2 rounded-lg btn-secondary text-slate-300 hover:text-white"
+              title="View Source on GitHub"
             >
               <Github className="w-4 h-4" />
             </a>
@@ -81,65 +76,67 @@ export default function Navbar({ apiKey, setApiKey }: NavbarProps) {
       {/* API Key Modal */}
       <AnimatePresence>
         {showKeyModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              className="glass-panel w-full max-w-md p-6 rounded-2xl border border-emerald-500/30 shadow-2xl relative"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              className="surface-panel w-full max-w-md p-6 rounded-2xl border border-emerald-500/30 shadow-2xl relative"
             >
               <div className="flex items-center gap-2 mb-2 text-emerald-400">
                 <Sparkles className="w-5 h-5" />
-                <h3 className="font-semibold text-lg text-white">Gemini Vision AI (Optional)</h3>
+                <h3 className="font-semibold text-lg text-white">Gemini Multimodal Vision</h3>
               </div>
               <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                By default, this app uses our built-in 39-category PlantVillage CNN engine. You can optionally connect a free Google Gemini API key to activate multimodal vision verification.
+                By default, this application classifies leaves against all 39 PlantVillage categories using the local CNN deep feature engine. You can optionally add a Google Gemini API key to enable secondary cross-verification.
               </p>
 
               <div className="space-y-3">
                 <div>
-                  <label className="text-xs font-medium text-slate-300 mb-1 block">Google Gemini API Key</label>
+                  <label className="text-xs font-semibold text-slate-200 mb-1.5 block">
+                    Google Gemini API Key
+                  </label>
                   <input
                     type="password"
                     value={tempKey}
                     onChange={(e) => setTempKey(e.target.value)}
                     placeholder="AIzaSy..."
-                    className="w-full px-3 py-2 bg-slate-900/90 border border-emerald-500/30 rounded-lg text-sm text-white focus:outline-none focus:border-emerald-400"
+                    className="w-full px-3 py-2 bg-[#060d08] border border-[#20442a] rounded-lg text-sm text-white focus:outline-none focus:border-emerald-500 font-mono"
                   />
                 </div>
 
-                <div className="flex justify-between items-center text-xs text-slate-400">
+                <div className="flex justify-between items-center text-xs">
                   <a
                     href="https://aistudio.google.com/app/apikey"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-emerald-400 hover:underline"
+                    className="text-emerald-400 hover:text-emerald-300 underline"
                   >
-                    Get free API Key →
+                    Get free API key from Google AI Studio →
                   </a>
                   {tempKey && (
                     <button
                       type="button"
                       onClick={() => setTempKey("")}
-                      className="text-red-400 hover:underline"
+                      className="text-rose-400 hover:text-rose-300 underline"
                     >
-                      Clear key
+                      Clear
                     </button>
                   )}
                 </div>
 
-                <div className="flex gap-2 pt-3">
+                <div className="flex gap-2.5 pt-3">
                   <button
                     type="button"
                     onClick={() => setShowKeyModal(false)}
-                    className="flex-1 py-2 text-sm rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+                    className="flex-1 py-2 text-sm rounded-lg btn-secondary"
                   >
                     Cancel
                   </button>
                   <button
                     type="button"
                     onClick={handleSaveKey}
-                    className="flex-1 py-2 text-sm rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium"
+                    className="flex-1 py-2 text-sm rounded-lg btn-primary"
                   >
                     Save Key
                   </button>

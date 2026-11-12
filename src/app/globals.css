@@ -3,55 +3,105 @@
 @tailwind utilities;
 
 :root {
-  --background: #09120b;
-  --foreground: #f1f7f2;
+  --bg-base: #060d08;
+  --bg-surface: #0c180f;
+  --bg-card: #112215;
+  --bg-card-hover: #162c1b;
+  --border-subtle: #193820;
+  --border-active: #2b5c35;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #8da291;
+  --accent-emerald: #10b981;
+  --accent-emerald-light: #34d399;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  overflow-x: hidden;
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Glassmorphism helpers */
-.glass-panel {
-  background: rgba(18, 38, 22, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(74, 222, 128, 0.18);
+/* Background Atmosphere */
+.bg-ambient {
+  background-color: #060d08;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(16, 185, 129, 0.12), transparent),
+    radial-gradient(circle 600px at 10% 40%, rgba(5, 150, 105, 0.05), transparent),
+    radial-gradient(circle 500px at 90% 70%, rgba(16, 185, 129, 0.06), transparent);
 }
 
-.glass-card {
-  background: rgba(22, 45, 27, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(74, 222, 128, 0.12);
+/* Production-grade card & panel surfaces */
+.surface-panel {
+  background-color: #0c180f;
+  border: 1px solid #1a3821;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
-.glass-card:hover {
-  border-color: rgba(74, 222, 128, 0.35);
-  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.15);
+.surface-card {
+  background-color: #112215;
+  border: 1px solid #1c3d25;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Subtle glowing background gradient */
-.bg-mesh {
-  background: radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 45%),
-              radial-gradient(circle at 85% 85%, rgba(5, 150, 105, 0.12) 0%, transparent 45%),
-              radial-gradient(circle at 50% 50%, rgba(6, 78, 59, 0.15) 0%, transparent 60%);
+.surface-card:hover {
+  background-color: #152b1b;
+  border-color: #2b5c35;
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(52, 211, 153, 0.1);
 }
 
-/* Custom scrollbar */
+.surface-subtle {
+  background-color: #09130b;
+  border: 1px solid #152d1b;
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.35);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(180deg, #34d399 0%, #10b981 100%);
+  box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: #112215;
+  color: #e2e8f0;
+  border: 1px solid #20442a;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #172f1e;
+  border-color: #2e623b;
+  color: #ffffff;
+}
+
+/* Custom crisp scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #09120b;
+  background: #060d08;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(74, 222, 128, 0.3);
-  border-radius: 4px;
+  background: #1c3d25;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(74, 222, 128, 0.6);
+  background: #2b5c35;
 }
