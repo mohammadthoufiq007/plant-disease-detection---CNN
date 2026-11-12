@@ -336,16 +336,6 @@ export default function Home() {
           )}
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-[#1a3821] py-6 text-center text-xs text-slate-400 bg-[#060d08]">
-        <p className="mb-1 text-slate-300">
-          🌿 Plant Disease Detection CNN • Next.js, React & Tailwind CSS
-        </p>
-        <p className="text-[11px] text-emerald-400/80">
-          PlantVillage Benchmark Dataset (39 Disease Categories) • Vercel Ready
-        </p>
-      </footer>
     </div>
   );
 }
